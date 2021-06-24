@@ -1,32 +1,38 @@
 #include <gui/window.hpp>
-#include <core/piece.hpp>
+#include <core/board.hpp>
 #include <iostream>
 
 int main(int argc, char** argv)
 {
-    char piece = core::Piece::MONKEY | core::Piece::WHITE;
-
-    std::cout << piece << std::endl;
-    std::cout << sizeof(core::Piece) << std::endl;
-
+    core::Board board(8, 8);
 
     gui::Window window;
     window.init();
 
+    window.set_board_size(board.cols(), board.rows());
+
+    // GUI for-loop
+    const float frame_rate = 5.0f; // 60 FPS
+    int end = 0;
     while (true) {
-        window.clear();
+        int begin = SDL_GetTicks();
+        float delta = begin - end;
 
-        SDL_Event event;
-        while (SDL_PollEvent(&event)) {
-            switch (event.type) {
-            case SDL_QUIT:
-                window.destroy();
-                return 0;
-            default:
-                break;
+        if (delta > 1000.0f/frame_rate) {
+            window.clear();
+
+            end = begin;
+
+            SDL_Event event;
+            while (SDL_PollEvent(&event)) {
+                bool keep = window.on_event(event);
+                if (!keep) return 0;
             }
-        }
 
-        window.draw();
+            window.draw(0.0f);
+        }
+        else {
+            SDL_Delay(1000.0f/frame_rate - delta);
+        }
     }
 }

@@ -1,5 +1,8 @@
 add_library(core SHARED
-        core/piece.cpp)
+        core/piece.cpp
+        core/board.cpp
+        core/observer.cpp
+        core/fen.cpp)
 
 add_library(gui SHARED
         gui/window.cpp

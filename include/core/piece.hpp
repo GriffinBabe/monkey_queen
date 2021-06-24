@@ -13,6 +13,11 @@ enum Piece {
     BLACK = 8,
 };
 
+enum Team {
+    WHITE_T = 0,
+    BLACK_T = 1
+};
+
 using CoordInt = char;
 
 struct BoardCoord {

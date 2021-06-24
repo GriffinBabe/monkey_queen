@@ -37,3 +37,9 @@ void gui::PieceInstance::draw(SDL_Renderer* renderer,
 {
     std::cout << "Draw piece" << std::endl;
 }
+
+void gui::PieceInstance::update(core::Observable* observer,
+                                core::GameEvent& event)
+{
+    // TODO implement
+}

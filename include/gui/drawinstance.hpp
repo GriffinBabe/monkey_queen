@@ -4,6 +4,7 @@
 #include <SDL.h>
 #include <gui/texture_manager.hpp>
 #include <core/piece.hpp>
+#include <core/observer.hpp>
 
 namespace gui {
 
@@ -13,7 +14,7 @@ enum PieceStatus {
     STILL, MOVING, DRAGGED
 };
 
-class DrawInstance {
+class DrawInstance : public core::Observer {
 
 public:
     DrawInstance(std::string name);
@@ -32,6 +33,10 @@ public:
     PieceInstance(core::Piece piece);
 
     void draw(SDL_Renderer* renderer, const TextureManager& manager) override;
+
+private:
+
+    void update(core::Observable* observer, core::GameEvent& event) override;
 
 private:
     core::Piece _piece;
