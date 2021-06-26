@@ -20,4 +20,6 @@ namespace core {
      */
     std::string to_fen(Board const& board);
 
+    Board from_fen(std::string const& fen);
+
 }

@@ -8,9 +8,11 @@ using uchar = unsigned char;
 
 class Board : public Observable {
 public:
-
-    Board(int cols, int rows);
-
+    Board(int cols,
+          int rows,
+          int stack = 8,
+          int turn = 0,
+          uchar playing = WHITE_T);
 
     [[nodiscard]] const uchar* board() const;
 
@@ -24,17 +26,26 @@ public:
 
     [[nodiscard]] int turn() const;
 
+    [[nodiscard]] int stack(core::Team team) const;
+
+    void set_stack(int stack, core::Team team);
+
+    void set_board(uchar* board, size_t size);
+
 private:
+    int _white_queen_stack = 0;
+
+    int _black_queen_stack = 0;
+
     int _cols = 0;
+
     int _rows = 0;
 
     int _turn = 0;
 
     uchar _playing = Team::WHITE_T;
 
-
     std::unique_ptr<uchar> _board = nullptr;
 };
 
-
-}
+} // namespace core

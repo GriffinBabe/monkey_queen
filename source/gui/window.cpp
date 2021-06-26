@@ -80,6 +80,7 @@ bool gui::Window::destroy()
 {
     SDL_DestroyRenderer(_renderer);
     SDL_DestroyWindow(_window);
+    return true;
 }
 
 bool gui::Window::on_event(SDL_Event const& event)
