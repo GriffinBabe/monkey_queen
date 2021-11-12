@@ -51,7 +51,7 @@ constexpr bitboard_t BLACK_K_CASTLE_MASK = 0x0000000800000000;
 
 constexpr bitboard_t BLACK_Q_CASTLE_MASK = 0x0000001000000000;
 
-enum Piece { PAWN = 0, KNIGHT = 1, BISHOP = 2, ROOK = 3, QUEEN = 4, KING = 5 };
+enum Piece { NONE = -1, PAWN = 0, KNIGHT = 1, BISHOP = 2, ROOK = 3, QUEEN = 4, KING = 5 };
 
 class Board {
 public:

@@ -2,6 +2,10 @@
 #include <iostream>
 #include <sstream>
 #include <vector>
+#include <map>
+
+const std::vector<char> rank_array = {'1', '2', '3', '4', '5', '6', '7', '8'};
+const std::vector<char> file_array = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
 
 std::int8_t util::get_index_from_position(char file, char rank)
 {
@@ -17,8 +21,6 @@ std::int8_t util::get_index_from_position(char file, char rank)
 
 void util::print_bitboard(core::bitboard_t board)
 {
-    std::vector<char> rank_array = {'1', '2', '3', '4', '5', '6', '7', '8'};
-    std::vector<char> file_array = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'};
     std::stringstream ss;
     for (int rank = 7; rank >= 0; rank--) {
         ss << rank_array[rank] << " ";
