@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <math.h>
 
 namespace core {
 
@@ -121,22 +122,22 @@ public:
     /**
      * Makes the white king's side castle possible
      */
-    constexpr void set_castle_white_king();
+    constexpr void set_castle_white_king(bool value = true);
 
     /**
      * Makes the white king's side castle possible
      */
-    constexpr void set_castle_white_queen();
+    constexpr void set_castle_white_queen(bool value = true);
 
     /**
      * Makes the white king's side castle possible
      */
-    constexpr void set_castle_black_king();
+    constexpr void set_castle_black_king(bool value = true);
 
     /**
      * Makes the white king's side castle possible
      */
-    constexpr void set_castle_black_queen();
+    constexpr void set_castle_black_queen(bool value = true);
 
     /**
      * Sets the board en passant bitboard
@@ -234,24 +235,28 @@ constexpr bool core::Board::can_castle_black_queen() const
     return _board[OTHER_DATA] & BLACK_Q_CASTLE_MASK;
 }
 
-constexpr void core::Board::set_castle_white_king()
+constexpr void core::Board::set_castle_white_king(bool value)
 {
-    _board[OTHER_DATA] |= WHITE_K_CASTLE_MASK;
+    bitboard_t castle = ((bitboard_t) (value > 0)) << 33u;
+    _board[OTHER_DATA] = (_board[OTHER_DATA] & ~WHITE_K_CASTLE_MASK) + castle;
 }
 
-constexpr void core::Board::set_castle_white_queen()
+constexpr void core::Board::set_castle_white_queen(bool value)
 {
-    _board[OTHER_DATA] |= WHITE_Q_CASTLE_MASK;
+    bitboard_t castle = ((bitboard_t) (value > 0)) << 34u;
+    _board[OTHER_DATA] = (_board[OTHER_DATA] & ~WHITE_Q_CASTLE_MASK) + castle;
 }
 
-constexpr void core::Board::set_castle_black_king()
+constexpr void core::Board::set_castle_black_king(bool value)
 {
-    _board[OTHER_DATA] |= BLACK_K_CASTLE_MASK;
+    bitboard_t castle = ((bitboard_t) (value > 0)) << 35u;
+    _board[OTHER_DATA] = (_board[OTHER_DATA] & ~BLACK_K_CASTLE_MASK) + castle;
 }
 
-constexpr void core::Board::set_castle_black_queen()
+constexpr void core::Board::set_castle_black_queen(bool value)
 {
-    _board[OTHER_DATA] |= BLACK_Q_CASTLE_MASK;
+    bitboard_t castle = ((bitboard_t) (value > 0)) << 36u;
+    _board[OTHER_DATA] = (_board[OTHER_DATA] & ~BLACK_Q_CASTLE_MASK) + castle;
 }
 
 constexpr void core::Board::set_en_passant(core::bitboard_t board)

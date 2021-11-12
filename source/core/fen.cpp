@@ -193,5 +193,6 @@ core::Board core::from_fen(const std::string& fen)
 
 std::string core::to_fen(const Board& board)
 {
+    // TODO implement
     return std::string();
 }

@@ -35,19 +35,6 @@ class FenTest : public ::testing::Test {
     friend class core::Board;
 };
 
-TEST_F(FenTest, test_bitwise_operators_1)
-{
-    // find the rightmost set bit
-    core::bitboard_t complement = -core::FULLMOVE_CLOCK_MASK;
-    core::bitboard_t bitwise_and = complement & core::FULLMOVE_CLOCK_MASK;
-
-    ASSERT_EQ(log2(bitwise_and), 16);
-
-    // check if the bitshift is well defined
-    // util::print_bitboard(core::HALFMOVE_CLOCK_MASK << 16u);
-    ASSERT_EQ(core::HALFMOVE_CLOCK_MASK << 16u, core::FULLMOVE_CLOCK_MASK);
-}
-
 TEST_F(FenTest, from_fen_starting_position)
 {
     const core::Board board = core::from_fen(fen_starting_position);
