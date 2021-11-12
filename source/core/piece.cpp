@@ -1,2 +1,0 @@
-#include <core/piece.hpp>
-
