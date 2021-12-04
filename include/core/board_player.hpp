@@ -1,7 +1,7 @@
 #pragma once
 #include "core/board.hpp"
 #include "core/fen.hpp"
-
+#include "core/util.hpp"
 
 namespace core {
 
@@ -9,12 +9,12 @@ struct Move {
     /**
      * Starting position
      */
-    std::uint8_t start_index = 0;
+    core::bitboard_t start = 0;
 
     /**
      * Exiting position
      */
-    std::uint8_t stop_index = 0;
+    core::bitboard_t end = 0;
 
     /**
      * Not used most of the time
@@ -22,15 +22,18 @@ struct Move {
     core::Piece promotion = NONE;
 
     /**
-     * Not used most of the time
+     * Not used most of the time.
+     *
+     * Castle king side = 1
+     * Castle queen's side = 1
      */
-    core::Piece castle = NONE;
+    std::int8_t castle = 0;
 };
 
 /**
  * Board player is a wrapper around the Board that provides game management and
- * a higher level control of the game. Management such as playing moves, checking
- * wins are available
+ * a higher level control of the game. Management such as playing moves,
+ * checking wins are available
  */
 class BoardPlayer {
 public:
@@ -39,10 +42,14 @@ public:
     ~BoardPlayer();
 
 private:
+    bool _is_move_possible(Move const& move);
 
-    bool is_move_possible();
+    static Move _generate_move(std::string const& start,
+                                      std::string const& end,
+                                      core::Piece promotion = NONE,
+                                      std::uint8_t castle = 0);
 
     core::Board _board;
 };
 
-}
+} // namespace core
